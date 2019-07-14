@@ -1,0 +1,48 @@
+.information
+  メッセージ成功
+
+.wrapper
+  
+  .left-content
+    .user-content
+      .user-content__box
+        %p ユーザー名
+        %ul.user-content__box__icon
+          %li
+            %i.fa.fa-edit
+          %li
+            %i.fa.fa-cog
+    .groups
+      .group
+        %p.group__name チーム1
+        %p.group__message メッセージ1
+      .group
+        %p.group__nameチーム2
+        %p.group__message メッセージ2
+
+  .right-content
+    .top-content
+      .top-content__left-box
+        %h2.team-name チーム1
+        %ul.member-list
+          %li Member：
+          %li k152744
+      .top-content__edit
+        Edit
+
+    .messages
+      .message
+        .message__info
+          %p.message__info__user ユーザー名
+          %p.message__info__data 2019/7/12(fri) 18:22:30
+        %p.message__content メッセージ
+
+    .form
+      %form{method: "post"}
+        .message-box  
+          .input-box
+            %input.text-message{type: "text",placeholder: "type a message"}
+            %i.fa.fa-image
+          %input.submit-box{type: "submit",value: "Send"}
+
+
