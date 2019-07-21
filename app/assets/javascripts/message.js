@@ -41,8 +41,8 @@ $(function(){
     })
     //↓ 非同期通信成功時に上で定義した関数を実行
     
-    .done(function(data){
-      var html = buildHTML(data);
+    .done(function(message_contents){
+      var html = buildHTML(message_contents);
       $(".messages").append(html);
       $("#message_text").val("");
       $('.submit-box').prop('disabled', false);

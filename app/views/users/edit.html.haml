@@ -8,14 +8,14 @@
     .account-page__inner--right.user-form
       = form_for(current_user) do |f|
         .field
-          .field-label
+          .field__label
             = f.label :name
-          .field-input
+          .field__input
             = f.text_field :name, autofocus: true
         .field
-          .field-label
+          .field__label
             = f.label :email
-          .field-input
+          .field__input
             = f.email_field :email
         .actions
           = f.submit "Update", class: 'btn'
