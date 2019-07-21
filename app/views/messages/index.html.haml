@@ -1,48 +1,53 @@
-.information
-  メッセージ成功
 
 .wrapper
-  
   .left-content
     .user-content
       .user-content__box
-        %p ユーザー名
+        = current_user.name
         %ul.user-content__box__icon
           %li
-            %i.fa.fa-edit
+            = link_to new_group_path do
+              = fa_icon 'pencil-square-o', class: 'icon'
           %li
-            %i.fa.fa-cog
+            = link_to edit_user_path(current_user) do
+              = fa_icon 'cog', class: 'icon'       
     .groups
-      .group
-        %p.group__name チーム1
-        %p.group__message メッセージ1
-      .group
-        %p.group__nameチーム2
-        %p.group__message メッセージ2
-
+      - current_user.groups.each do |group|
+        .group
+          = link_to group_messages_path(group) do
+            %p.group__name 
+              = group.name
+            %p.group__message 
+              メッセージ
   .right-content
     .top-content
       .top-content__left-box
-        %h2.team-name チーム1
+        %h2.team-name   
+          = @group.name
         %ul.member-list
           %li Member：
-          %li k152744
+          %li 
+            = current_user.name
       .top-content__edit
-        Edit
-
+        = link_to "Edit" , edit_group_path(@group) 
     .messages
-      .message
-        .message__info
-          %p.message__info__user ユーザー名
-          %p.message__info__data 2019/7/12(fri) 18:22:30
-        %p.message__content メッセージ
-
+      - @messages.each do |message|
+        .message
+          .message__info
+            %p.message__info__user 
+              = message.user.name
+            %p.message__info__data 
+              = message.created_at.strftime("%Y/%m/%d %H:%M")
+          %p.message__content 
+            = message.text
     .form
-      %form{method: "post"}
+      = form_for [@group,@message] do |f|
         .message-box  
           .input-box
-            %input.text-message{type: "text",placeholder: "type a message"}
-            %i.fa.fa-image
-          %input.submit-box{type: "submit",value: "Send"}
+            = f.text_field :text, class: "text-message",placeholder: "type a message"
+            = f.label :image, class: "form-image" do
+              %i.fa.fa-image
+              = f.file_field :image
+          = f.submit "Send",class: "submit-box" 
 
 
