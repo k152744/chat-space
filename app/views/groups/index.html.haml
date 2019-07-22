@@ -1,0 +1,47 @@
+
+.wrapper
+  .left-content
+    .user-content
+      .user-content__box
+        = current_user.name
+        %ul.user-content__box__icon
+          %li
+            = link_to new_group_path do
+              = fa_icon 'pencil-square-o', class: 'icon'
+          %li
+            = link_to edit_user_path(current_user) do
+              = fa_icon 'cog', class: 'icon'       
+    .groups
+      - current_user.groups.each do |group|
+        .group
+          = link_to group_messages_path(group) do
+            %p.group__name 
+              = group.name
+            %p.group__message 
+              メッセージはまだありません。
+  .right-content
+    -# .top-content
+    -#   .top-content__left-box
+    -#     %h2.team-name チーム1
+    -#     %ul.member-list
+    -#       %li Member：
+    -#       %li k152744
+    -#   .top-content__edit
+    -#     Edit
+
+    -# .messages
+    -#   .message
+    -#     .message__info
+    -#       %p.message__info__user ユーザー名
+    -#       %p.message__info__data 2019/7/12(fri) 18:22:30
+    -#     %p.message__content メッセージ
+
+    -# .form
+    -#   %form{method: "post"}
+    -#     .message-box  
+    -#       .input-box
+    -#         %input.text-message{type: "text",placeholder: "type a message"}
+    -#         %i.fa.fa-image
+    -#       %input.submit-box{type: "submit",value: "Send"}
+
+
