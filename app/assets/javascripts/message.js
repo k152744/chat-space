@@ -43,9 +43,11 @@ $(function(){
     .done(function(message_contents){
       var html = buildHTML(message_contents);
       $(".messages").append(html);
-      $("#message_text").val("");
       $('.submit-box').prop('disabled', false);
+      $("#message_text").val("");
       scroll();
+      $(".text-message")[0].reset();
+      
     })
     .fail(function(){
       alert("error");

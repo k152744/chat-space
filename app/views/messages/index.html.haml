@@ -44,7 +44,7 @@
       = form_for [@group,@message] do |f|
         .message-box  
           .input-box
-            = f.text_field :text, class: "text-message",placeholder: "type a message"
+            = f.text_field :text,class: "text-message",placeholder: "type a message"
             = f.label :image, class: "form-image" do
               %i.fa.fa-image
               = f.file_field :image
