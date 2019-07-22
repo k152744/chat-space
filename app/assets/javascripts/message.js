@@ -21,16 +21,15 @@ $(function(){
     $('.messages').animate({scrollTop:$('.messages')[0].scrollHeight});
   }
 
-  //$('.messages')[0].scrollHeight
 
   $("#new_message").on("submit",function(e) {
  
     e.preventDefault();
-    console.log("OK");
+   
 
     var formData = new FormData(this);
     var url = $(this).attr("action");
-    console.log("OK");
+    
     $.ajax({
       url:url,
       type:"POST",
@@ -39,7 +38,7 @@ $(function(){
       processData:false,
       contentType:false
     })
-    //↓ 非同期通信成功時に上で定義した関数を実行
+   
     
     .done(function(message_contents){
       var html = buildHTML(message_contents);
