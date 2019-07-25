@@ -32,7 +32,7 @@
         = link_to "Edit" , edit_group_path(@group) 
     .messages
       - @messages.each do |message|
-        .message
+        .message{"data-id": message.id}
           .message__info
             %p.message__info__user 
               = message.user.name

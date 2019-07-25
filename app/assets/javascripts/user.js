@@ -19,7 +19,6 @@ $(document).on("turbolinks:load",(function(){
     return html;
   }
   
-
   $("#user-search-field").on("keyup",function(e){
     e.preventDefault();
     var input = $.trim($(this).val());
@@ -52,20 +51,13 @@ $(document).on("turbolinks:load",(function(){
   $("#user-search-result").on("click",".user-search-add",function(){
     var userId = $(this).data("user-id");
     var userName = $(this).data("user-name");
-
-
     var html = buildHTML_user(userId,userName);
-    $("#chat-group-users").append(html);
-
-    $(".user-search-add").parent(this).remove();
     
+    $("#chat-group-users").append(html);
+    $(".user-search-add").parent(this).remove();
   })
-
-  
 
   $("#chat-group-users").on("click",".user-search-remove",function(){
-
     $(".user-search-remove").parent(this).remove();
   })
-
 }))
