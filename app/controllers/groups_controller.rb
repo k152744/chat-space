@@ -19,7 +19,6 @@ class GroupsController < ApplicationController
   end
 
   def edit
-   
   end
 
   def update
@@ -29,7 +28,6 @@ class GroupsController < ApplicationController
       render :edit
     end
   end
-
 
   private
 
