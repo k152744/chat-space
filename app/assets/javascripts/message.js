@@ -1,7 +1,7 @@
 $(function(){
 
   function buildHTML(message){
-    var html = `<div class="message">
+    var html = `<div class="message data-id = ${message.id}">
                   <div class="message__info">
                     <p class="message__info__user">
                       ${message.user_name}
@@ -17,9 +17,49 @@ $(function(){
 
     return html;
   }
+
+  
+
+
   function scroll(){
     $('.messages').animate({scrollTop:$('.messages')[0].scrollHeight});
   }
+
+  $(function(){
+    setInterval(reloadMessages, 10000);
+    
+  });
+
+  function reloadMessages(){
+    var message_id = $(".message:last").data('id'); 
+
+    $.ajax({
+      url: location.href,
+      type: "GET",
+      data: {
+        message: {id: message_id}
+      },
+      dataType:"json"
+
+    })
+
+    .done(function(message_contents){
+      console.log('success');
+
+      $.each(message_contents,function(i, message_contents){
+
+        var html = buildHTML(message_contents);
+        $(".messages").append(html);
+      })
+     
+      scroll();
+    })
+    .fail(function(){
+      console.log('error');
+
+    })
+  }
+
 
 
   $("#new_message").on("submit",function(e) {
