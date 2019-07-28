@@ -42,7 +42,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'factory_bot_rails'
   gem 'faker'
-
+  gem 'pry-byebug'
   gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
@@ -69,12 +69,12 @@ gem 'haml-rails'
 gem 'erb2haml'
 
 gem 'devise'
-
-gem 'carrierwave'
 gem 'fog-aws'
 
-gem 'mini_magick'
 gem "jquery-rails"
+
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :production do
   gem 'unicorn', '5.4.1'

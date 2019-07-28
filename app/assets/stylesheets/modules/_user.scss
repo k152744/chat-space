@@ -51,7 +51,7 @@
   .field {
     margin-bottom: 10px;
 
-    &__label {
+    .field-label{
       padding: 10px 0;
       letter-spacing: 1px;
       font-size: 14px;
@@ -62,7 +62,7 @@
       }
     }
 
-    &__input {
+    .field-input {
       input {
         width: 100%;
         padding: 10px;

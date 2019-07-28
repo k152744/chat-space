@@ -18,7 +18,7 @@
             %p.group__name 
               = group.name
             %p.group__message 
-              メッセージ
+              = group.show_last_message
   .right-content
     .top-content
       .top-content__left-box
@@ -27,9 +27,11 @@
         %ul.member-list
           %li Member：
           %li 
-            = current_user.name
-      .top-content__edit
-        = link_to "Edit" , edit_group_path(@group) 
+            - @group.users.each do |user|
+              = user.name
+      = link_to edit_group_path(@group) do
+        .top-content__edit
+          Edit
     .messages
       - @messages.each do |message|
         .message{"data-id": message.id}
@@ -38,8 +40,11 @@
               = message.user.name
             %p.message__info__data 
               = message.created_at.strftime("%Y/%m/%d %H:%M")
-          %p.message__content 
-            = message.text
+          .message__text
+            - if message.text.present?
+              %p.message__content 
+                = message.text 
+            = image_tag message.image.url class: "message__image" if message.image.present?
     .form
       = form_for [@group,@message] do |f|
         .message-box  

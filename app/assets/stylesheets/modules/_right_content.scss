@@ -26,12 +26,9 @@
       padding:0 20px;
       margin-top:28px;
       border:solid 1px #38aef0;
-      
-      a{
-        text-decoration: none;
-        color:#38aef0;
-        cursor: pointer;
-      }
+      position: absolute;
+      right: 40px;
+      color:#38aef0;
     }
     
   }
@@ -60,6 +57,7 @@
       color:#434a54;
       font-size:14px;
       margin-top:10px;
+      margin-bottom: 10px;
     }
     }
   } 

@@ -1,6 +1,7 @@
 $(function(){
 
   function buildHTML(message){
+    var image_url = (message.image_url)? `<image class="message__image" src="${message.image_url}">`:""
     var html = `<div class="message data-id = ${message.id}">
                   <div class="message__info">
                     <p class="message__info__user">
@@ -10,9 +11,12 @@ $(function(){
                       ${message.time}
                     </p>
                   </div>
+                  <div class="message__text">
                     <p class="message__content">
                       ${message.text}
                     </p>
+                    ${image_url}
+                  </div>
                 </div>`;
 
     return html;
@@ -20,31 +24,6 @@ $(function(){
 
   function scroll(){
     $('.messages').animate({scrollTop:$('.messages')[0].scrollHeight});
-  }
-
-  $(function(){
-    setInterval(reloadMessages, 10000);
-  });
-
-  function reloadMessages(){
-    var message_id = $(".message:last").data('id'); 
-
-    $.ajax({
-      url: location.href,
-      type: "GET",
-      data: {
-        message: {id: message_id}
-      },
-      dataType:"json"
-    })
-
-    .done(function(message_contents){
-      $.each(message_contents,function(i, message_contents){
-        var html = buildHTML(message_contents);
-        $(".messages").append(html);
-      })
-      scroll();
-    })
   }
 
   $("#new_message").on("submit",function(e) {
@@ -60,19 +39,40 @@ $(function(){
       processData:false,
       contentType:false
     })
-
     .done(function(message_contents){
       var html = buildHTML(message_contents);
       $(".messages").append(html);
       $('.submit-box').prop('disabled', false);
       $("#message_text").val("");
       scroll();
-      $(".text-message")[0].reset();
     })
-    
     .fail(function(){
       alert("error");
       $('.submit-box').prop('disabled', false);
     })
   })
+
+  var reloadMessages = function(){
+      var message_id = $(".message:last").data('id');
+      $.ajax({
+        url:"api/messages",
+        type: "GET",
+        data: {id: message_id},
+        dataType:"json"
+      })
+      .done(function(message_contents){
+        console.log(message_contents);
+        $.each(message_contents,function(i, message_contents){
+          var html = buildHTML(message_contents);
+          $(".messages").append(html);
+          scroll();
+        })
+      })
+      .fail(function(){
+        alert("自動更新に失敗しました");
+      })
+    }
+  if(location.href.match(/\/groups\/\d+\/messages/)){
+    setInterval(reloadMessages, 10000);
+  }
 })
