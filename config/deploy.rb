@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.0"
+lock "3.11.0"
 
 set :application, "chat-space"
-set :repo_url, "git@example.com:k152744/chat-space.git"
+set :repo_url, "git@github.com:k152744/chat-space.git"
 
 # バージョンが変わっても共通で参照するディレクトリを指定
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
@@ -28,6 +28,7 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
   end
+end
 
   desc 'upload secrets.yml'
   task :upload do
@@ -40,7 +41,7 @@ namespace :deploy do
   end
   before :starting, 'deploy:upload'
   after :finishing, 'deploy:cleanup'
-end
+
 
 set :default_env, {
   rbenv_root: "/usr/local/rbenv",
