@@ -28,7 +28,7 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
   end
-end
+
 
   desc 'upload secrets.yml'
   task :upload do
@@ -41,7 +41,7 @@ end
   end
   before :starting, 'deploy:upload'
   after :finishing, 'deploy:cleanup'
-
+end
 
 set :default_env, {
   rbenv_root: "/usr/local/rbenv",
