@@ -1,9 +1,8 @@
 $(document).on('turbolinks:load', function() {
-$(function(){
 
   function buildHTML(message){
-    var image_url = (message.image_url)? `<image class="message__image" src="${message.image_url}">`:""
-    var html = `<div class="message data-id = ${message.id}">
+    var image_url = (message.image_url)? `<img class="message__image" src="${message.image_url}">`:""
+    var html = `<div class="message" data-id=${message.id}>
                   <div class="message__info">
                     <p class="message__info__user">
                       ${message.user_name}
@@ -44,7 +43,6 @@ $(function(){
       var html = buildHTML(message_contents);
       $(".messages").append(html);
       $('.submit-box').prop('disabled', false);
-      $("#message_text").val("");
       $('form')[0].reset();
       scroll();
     })
@@ -52,11 +50,11 @@ $(function(){
       alert("error");
       $('.submit-box').prop('disabled', false);
     })
-    return false;
-  })
+  });
 
-  var reloadMessages = function(){
+  function reloadMessages(){
       var message_id = $(".message:last").data('id');
+      console.log(message_id)
       $.ajax({
         url:"api/messages",
         type: "GET",
@@ -64,8 +62,10 @@ $(function(){
         dataType:"json"
       })
       .done(function(message_contents){
-        $.each(message_contents,function(i, message_contents){
-          var html = buildHTML(message_contents);
+        var html = "";
+        $.each(message_contents,function(i, message_content){
+          console.log(message_content)
+          html += buildHTML(message_content);
           $(".messages").append(html);
           scroll();
         })
@@ -77,5 +77,5 @@ $(function(){
   if(location.href.match(/\/groups\/\d+\/messages/)){
     setInterval(reloadMessages, 10000);
   }
-})
+
 });
