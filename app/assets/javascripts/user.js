@@ -1,4 +1,4 @@
-$(document).on("turbolinks:load",(function(){
+$(document).on("turbolinks:load", function(){
 
   var search_list = $("#user-search-result");
 
@@ -69,4 +69,4 @@ $(document).on("turbolinks:load",(function(){
   $("#chat-group-users").on("click",".user-search-remove",function(){
     $(this).parent().remove();
   })
-}))
+})
