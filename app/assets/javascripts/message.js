@@ -45,12 +45,14 @@ $(function(){
       $(".messages").append(html);
       $('.submit-box').prop('disabled', false);
       $("#message_text").val("");
+      $('form')[0].reset();
       scroll();
     })
     .fail(function(){
       alert("error");
       $('.submit-box').prop('disabled', false);
     })
+    return false;
   })
 
   var reloadMessages = function(){
