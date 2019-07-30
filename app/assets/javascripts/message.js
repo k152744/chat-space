@@ -64,7 +64,6 @@ $(function(){
         dataType:"json"
       })
       .done(function(message_contents){
-        console.log(message_contents);
         $.each(message_contents,function(i, message_contents){
           var html = buildHTML(message_contents);
           $(".messages").append(html);
